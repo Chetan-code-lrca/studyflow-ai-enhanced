@@ -564,12 +564,12 @@ const App: React.FC = () => {
           </div>
           
           <div style={{ background: 'linear-gradient(135deg, #2ed573, #17c969)', padding: '25px', borderRadius: '15px', color: 'white', boxShadow: '0 4px 15px rgba(0,0,0,0.2)' }}>
-            <h3 style={{ margin: '0 0 10px 0', fontSize: '16px', opacity: 0.9' }}>This Week</h3>
+            <h3 style={{ margin: '0 0 10px 0', fontSize: '16px', opacity: 0.9 }}>This Week</h3>
             <p style={{ margin: 0, fontSize: '32px', fontWeight: 'bold' }}>{weeklyHours.toFixed(1)}</p>
           </div>
           
           <div style={{ background: 'linear-gradient(135deg, #ffa502, #ff6348)', padding: '25px', borderRadius: '15px', color: 'white', boxShadow: '0 4px 15px rgba(0,0,0,0.2)' }}>
-            <h3 style={{ margin: '0 0 10px 0', fontSize: '16px', opacity: 0.9' }}>Completion Rate</h3>
+            <h3 style={{ margin: '0 0 10px 0', fontSize: '16px', opacity: 0.9 }}>Completion Rate</h3>
             <p style={{ margin: 0, fontSize: '32px', fontWeight: 'bold' }>{completionRate.toFixed(0)}%</p>
           </div>
         </div>
