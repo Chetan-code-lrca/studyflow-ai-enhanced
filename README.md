@@ -31,7 +31,7 @@ The suggestions are rule-based. They look at things such as overdue assignments,
 - Vite 5
 - `localStorage`
 
-The production build runs TypeScript checking before Vite creates the `dist/` directory. fileciteturn769file0
+The production build runs TypeScript checking before Vite creates the `dist/` directory.
 
 ## Run locally
 
@@ -65,7 +65,7 @@ http://localhost:5173
 npm run build
 ```
 
-This runs `tsc` followed by `vite build`. fileciteturn769file0
+This runs `tsc` followed by `vite build`.
 
 ### Preview the production build
 
@@ -75,7 +75,7 @@ npm run preview
 
 ## GitHub Pages
 
-The repository has a GitHub Actions workflow that builds `dist/` and deploys it to GitHub Pages whenever `main` is updated. A manual workflow run is also available from GitHub Actions. fileciteturn732file0
+The repository has a GitHub Actions workflow that builds `dist/` and deploys it to GitHub Pages whenever `main` is updated. A manual workflow run is also available from GitHub Actions.
 
 The Vite base path is configured as:
 
@@ -83,7 +83,7 @@ The Vite base path is configured as:
 /studyflow-ai-enhanced/
 ```
 
-so the generated asset URLs work from the repository's Pages path. fileciteturn751file0
+so the generated asset URLs work from the repository's Pages path.
 
 The project also includes a `deploy` script using `gh-pages`:
 
@@ -91,7 +91,7 @@ The project also includes a `deploy` script using `gh-pages`:
 npm run deploy
 ```
 
-That command publishes the contents of `dist/`. fileciteturn769file0
+That command publishes the contents of `dist/`.
 
 ## Data and privacy
 
@@ -122,7 +122,7 @@ studyflow-ai-enhanced/
 └── README.md
 ```
 
-`src/App.tsx` contains the application's state, storage, calculations, recommendations, and UI. `src/main.tsx` mounts the React application. fileciteturn733file0 fileciteturn758file0
+`src/App.tsx` contains the application's state, storage, calculations, recommendations, and UI. `src/main.tsx` mounts the React application.
 
 ## Using StudyFlow
 
@@ -132,11 +132,9 @@ New subjects start with a 40-hour target. Study sessions are recorded separately
 
 ## About the name
 
-The project is called StudyFlow AI, but the current recommendation system is local application logic rather than an LLM or hosted AI service. The repository contains no AI API requirement for the main app.
+The project is called StudyFlow AI, but the current recommendation system is local application logic rather than an LLM or hosted AI service. The main app does not require an AI API key.
 
 ## Current limitations
-
-The current version is deliberately simple:
 
 - subject targets are fixed at 40 hours when a subject is created;
 - there is no login, database, or cloud sync;
