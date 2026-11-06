@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { getStudyFlowStorage, loadStudyFlowState, saveStudyFlowCollection, STORAGE_KEYS } from './storage.mjs';
 
 // Type Definitions
 interface Subject {
@@ -35,6 +36,7 @@ const App: React.FC = () => {
   const [subjects, setSubjects] = useState<Subject[]>([]);
   const [assignments, setAssignments] = useState<Assignment[]>([]);
   const [studySessions, setStudySessions] = useState<StudySession[]>([]);
+  const [isHydrated, setIsHydrated] = useState(false);
   const [newSubjectName, setNewSubjectName] = useState('');
   const [newAssignment, setNewAssignment] = useState({
     title: '',
@@ -43,35 +45,30 @@ const App: React.FC = () => {
     priority: 'Medium' as 'High' | 'Medium' | 'Low'
   });
 
-  // Load data from localStorage on mount
+  // Hydrate saved data before allowing the persistence effects to run.
   useEffect(() => {
-    const savedSubjects = localStorage.getItem('studyflow_subjects');
-    const savedAssignments = localStorage.getItem('studyflow_assignments');
-    const savedSessions = localStorage.getItem('studyflow_sessions');
-    
-    if (savedSubjects) setSubjects(JSON.parse(savedSubjects));
-    if (savedAssignments) {
-      const parsed = JSON.parse(savedAssignments);
-      setAssignments(parsed.map((a: any) => ({ ...a, deadline: new Date(a.deadline) })));
-    }
-    if (savedSessions) {
-      const parsed = JSON.parse(savedSessions);
-      setStudySessions(parsed.map((s: any) => ({ ...s, date: new Date(s.date) })));
-    }
+    const saved = loadStudyFlowState(getStudyFlowStorage());
+    setSubjects(saved.subjects);
+    setAssignments(saved.assignments);
+    setStudySessions(saved.studySessions);
+    setIsHydrated(true);
   }, []);
 
-  // Save data to localStorage whenever it changes
+  // Do not write the initial empty state over saved data during first render.
   useEffect(() => {
-    localStorage.setItem('studyflow_subjects', JSON.stringify(subjects));
-  }, [subjects]);
+    if (!isHydrated) return;
+    saveStudyFlowCollection(getStudyFlowStorage(), STORAGE_KEYS.subjects, subjects);
+  }, [isHydrated, subjects]);
 
   useEffect(() => {
-    localStorage.setItem('studyflow_assignments', JSON.stringify(assignments));
-  }, [assignments]);
+    if (!isHydrated) return;
+    saveStudyFlowCollection(getStudyFlowStorage(), STORAGE_KEYS.assignments, assignments);
+  }, [isHydrated, assignments]);
 
   useEffect(() => {
-    localStorage.setItem('studyflow_sessions', JSON.stringify(studySessions));
-  }, [studySessions]);
+    if (!isHydrated) return;
+    saveStudyFlowCollection(getStudyFlowStorage(), STORAGE_KEYS.sessions, studySessions);
+  }, [isHydrated, studySessions]);
 
   // Subject Functions
   const addSubject = () => {
