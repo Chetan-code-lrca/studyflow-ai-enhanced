@@ -9,6 +9,7 @@ function isRecord(value) {
 }
 
 function validDate(value) {
+  if (typeof value !== "string" || value.trim() === "") return null;
   const date = new Date(value);
   return Number.isFinite(date.getTime()) ? date : null;
 }
